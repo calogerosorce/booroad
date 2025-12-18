@@ -203,11 +203,11 @@ export default function HomePage() {
 
 
     function handleTrash(codiceFiscale) {
-        const removeTrip = trip[0].viaggiatori.filter((element) => element.codiceFiscale != codiceFiscale)
+        const removeTraveler = trip[0].viaggiatori.filter(viaggiatore => viaggiatore.codiceFiscale !== codiceFiscale);
 
 
 
-        setTrip(removeTrip)
+        setTrip([{ ...trip[0], viaggiatori: removeTraveler }]);
     }
     const [trip, setTrip] = useState(filter)
 
