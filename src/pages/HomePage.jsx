@@ -198,17 +198,18 @@ export default function HomePage() {
 
 
     ))
-    const [trip, setTrip] = useState(filter)
 
 
 
-    function handleTrash(i) {
-        const removeTrip = trip.filter((element, index) => index !== i)
-        console.log(trip);
+
+    function handleTrash(codiceFiscale) {
+        const removeTrip = trip[0].viaggiatori.filter((element) => element.codiceFiscale != codiceFiscale)
+
 
 
         setTrip(removeTrip)
     }
+    const [trip, setTrip] = useState(filter)
 
     return (
         <div className="container">
@@ -229,23 +230,20 @@ export default function HomePage() {
                         <tbody>
                             {
                                 trip[0].viaggiatori.map((viaggiatore, i) => (
-                                    <>
-                                        {console.log(i)
-                                        }
-                                        <tr key={viaggiatore.codiceFiscale}>
-                                            <td>{viaggiatore.nome}</td>
-                                            <td className="d-none d-md-table-cell">{viaggiatore.cognome}</td>
-                                            <td className="log">
-                                                <Link>
-                                                    <button type="button" className="eye btn btn-outline-primary">
-                                                        <i className="bi bi-eye-fill"></i>
-                                                    </button>
-                                                </Link>
-                                                <button className="btn btn-outline-danger mx-2" onClick={() => handleTrash(i)}>
-                                                    <i className="bi bi-trash-fill"></i>
+                                    <tr key={viaggiatore.codiceFiscale}>
+                                        <td>{viaggiatore.nome}</td>
+                                        <td className="d-none d-md-table-cell">{viaggiatore.cognome}</td>
+                                        <td className="log">
+                                            <Link>
+                                                <button type="button" className="eye btn btn-outline-primary">
+                                                    <i className="bi bi-eye-fill"></i>
                                                 </button>
-                                            </td>
-                                        </tr></>
+                                            </Link>
+                                            <button className="btn btn-outline-danger mx-2" onClick={() => handleTrash(viaggiatore.codiceFiscale)}>
+                                                <i className="bi bi-trash-fill"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 ))}
                         </tbody>
                     </table>
